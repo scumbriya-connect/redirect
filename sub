@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Перенаправление</title>
+</head>
+<body>
+    <p>Перенаправление...</p>
+    <script>
+        // Извлекаем параметр redirect_to из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirect_to');
+        
+        // Проверяем, есть ли параметр redirect_to и является ли он валидным URL
+        if (redirectUrl) {
+            try {
+                // Декодируем URL и перенаправляем
+                const decodedUrl = decodeURIComponent(redirectUrl);
+                window.location.href = decodedUrl;
+            } catch (e) {
+                // В случае ошибки показываем сообщение
+                document.body.innerHTML = '<p>Ошибка: Неверный URL для перенаправления.</p>';
+            }
+        } else {
+            // Если параметр redirect_to отсутствует
+            document.body.innerHTML = '<p>Ошибка: Не указан URL для перенаправления.</p>';
+        }
+    </script>
+</body>
+</html>
